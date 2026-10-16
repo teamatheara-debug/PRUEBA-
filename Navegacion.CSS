@@ -1,0 +1,554 @@
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+
+/* Primera barra de navegación (fija en la parte superior) */
+/* Primera barra tipo botones */
+
+.banner {
+  height: 100vh; /* ocupa toda la pantalla */
+  width: 100%;
+  background-image: url("HeimdallF1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* contenido abajo */
+  align-items: flex-start;   /* contenido a la izquierda */
+  color: #fff;
+  padding: 0 0 80px 60px; /* espacio interno */
+  position: relative;
+}
+
+/* Capa oscura opcional para contraste */
+.banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.13); /* filtro oscuro suave */
+  z-index: 1;
+}
+
+/* Contenedor del texto (por encima del filtro) */
+.banner-text {
+  position: relative;
+  z-index: 2;
+  max-width: 650px;
+}
+
+.top-bar-buttons {
+  height: 55px;
+  background: linear-gradient(180deg, #1f232c, #1d202d); 
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.top-bar-buttons.scrolled {
+  background-color: #ffffff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.top-bar-buttons .logo {
+  height: 30px;
+  transition: filter 0.3s ease;
+}
+
+/* Contenedor de botones */
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-buttons button {
+  padding: 8px 16px;
+  background-color: #fcfcfc;
+  color: rgb(24, 24, 24);
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px; /* espacio entre icono y texto si usas <i> */
+}
+
+.nav-buttons button:hover {
+  background-color: #0e0e0e;
+  transform: scale(1.05);
+  color: #e9e9e9;
+}
+
+/* Scroll efecto en botones */
+.top-bar-buttons.scrolled .nav-buttons button {
+  color: white; /* si quieres cambiar algo con scroll */
+}
+
+.perfil-icono {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%; /* redonda */
+  object-fit: cover; /* que la imagen no se deforme */
+  margin-right: 12px; /* separación del logo */
+  cursor: pointer; /* se puede hacer clic para perfil o menú */
+  border: 2px solid #b6b6b6; /* opcional, marco llamativo */
+  transition: transform 0.2s ease;
+}
+
+.perfil-icono:hover {
+  transform: scale(1.1); /* efecto divertido al pasar el mouse */
+}
+
+
+
+/* Estilo para el texto dentro del banner */
+.banner-text {
+  max-width: 850px; /* Limita el ancho del texto */
+}
+
+/* Estilo para el encabezado principal (tipografía Passion One) */
+.banner h1 {
+  font-size: 4.3rem;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+  margin-bottom: 10px;
+  padding-left: 60px;
+  line-height: 0.9;
+  background: linear-gradient(90deg, #ffffff, #ffffff);
+  background-size: 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: background-position 0.5s ease, font-size 0.6s ease-in-out;
+}
+
+.banner h1:hover {
+  animation: iridescent-glow 3s infinite linear;
+  font-size: 5.3rem;
+}
+
+@keyframes iridescent-glow {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 300% center;
+  }
+}
+
+/* Estilo para el párrafo debajo del encabezado */
+.banner p {
+  font-family: Arial, sans-serif;
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: rgb(249, 249, 249);
+  padding-left: 60px;
+  line-height: 1;
+  transition: background-position 0.5s ease, font-size 0.6s ease-in-out;
+}
+
+/* Estilo ajustado para el botón */
+.banner button {
+  padding: 14px 35px;   /* padding vertical y horizontal equilibrado */
+  font-size: 30px;      /* tamaño de fuente proporcional */
+  border: none;
+  background-color: rgb(4, 4, 4);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-left: 0;
+  margin-bottom: 30px;
+  width: auto;          /* ⚡ Ajusta el ancho al contenido */
+  max-width: 500px;     /* opcional: evita que sea demasiado largo */
+  display: inline-block;
+  margin-left: 50px;
+}
+
+.banner button:hover {
+  background-color: #fbfbfb;
+  color: rgb(26, 26, 26);
+}
+
+
+
+
+/* Estilo de formulario  -------------------------------------*/
+
+.form-container {
+  position: absolute; /* ✅ Flota sobre el fondo */
+  top: 15%;           /* Ajusta verticalmente (más arriba o abajo) */
+  right: 5%;          /* Margen derecho */
+ background: linear-gradient(180deg, #1f232c, #1d202d);  /* Ligero fondo blanco translúcido */
+  padding: 25px;
+  border-radius: 35px;
+  width: 370px;
+  font-family: "Kanit", sans-serif;
+  color: #e8e8e8;
+  z-index: 5;         /* ✅ por encima del filtro oscuro */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(6px); /* efecto moderno */
+}
+
+
+.logocentro {
+  display: block; /* lo convierte en un bloque */
+  margin: 0 auto 10px; /* auto a los lados lo centra */
+  max-width: 120px; /* opcional: tamaño máximo */
+  height: auto; /* mantiene proporción */
+  margin-top: 10px;
+}
+
+h2 {
+  text-align: center; /* Centra el texto del título (Cuenta Nueva) horizontalmente */
+  margin-bottom: 10px; /* Espacio debajo del título */
+  font-family: "Kanit", sans-serif;
+  font-size: 60px; /* Ajusta el tamaño si lo necesitas */
+  color: rgb(25, 25, 25);
+}
+
+.tex {
+  text-align: center;
+  margin-bottom: 1px;
+  font-size: 18px;
+}
+
+label {
+  display: block; /* Hace que el elemento ocupe toda la línea (bloque) */
+  margin: 3px 0 3px; /* Espacio superior de 10px, inferior de 5px */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"] {
+  width: 100%; /* El campo ocupa el 100% del ancho de su contenedor */
+  padding: 14px; /* Espacio interno dentro del campo de texto */
+  margin-bottom: 10px; /* Espacio inferior de 10px para separar campos */
+  border: none; /* Elimina los bordes predeterminados del input */
+  border-radius: 15px; /* Bordes redondeados de 5px */
+  background-color: #e8e8e8; /* Color de fondo gris oscuro para los campos */
+  color: rgb(40, 40, 40); /* El color del texto dentro del campo será blanco */
+  font-size: 16px;
+}
+
+input[type="checkbox"] {
+  margin-right: 20px; /* Espacio a la derecha del checkbox */
+}
+
+.name-section {
+  display: flex; /* Utiliza flexbox para organizar los campos */
+  justify-content: space-between; /* Coloca espacio igual entre los campos de nombres y apellidos */
+}
+
+.name-section div {
+  width: 44%; /* Asigna a cada campo de nombres/apellidos el 48% del ancho del contenedor */
+}
+
+select {
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #2c2c2c;
+  background-color: #303139;
+  font-size: 18px;
+  color: rgb(221, 221, 221);
+}
+
+button {
+  width: 100%; /* Los botones ocupan el 100% del ancho del contenedor */
+  padding: 10px; /* Espacio interno dentro del botón */
+  border: none; /* Elimina el borde por defecto */
+  border-radius: 5px; /* Bordes redondeados para el botón */
+  margin-top: 10px; /* Espacio superior para separar el botón de otros elementos */
+  cursor: pointer; /* Cambia el cursor a pointer al pasar por encima */
+}
+
+button.create-account {
+  background-color: #f0f0f0; /* Botón con fondo transparente */
+   color: rgb(30, 30, 30); /* Texto azul en el botón de inicio de sesión */
+  border: 1px solid #2b2b2b; /* Borde azul alrededor del botón */
+  padding: 14px; /* Añadir padding para que el botón sea más grande */
+  border-radius: 25px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+button.create-account:hover {
+    background-color: #2051cb; /* Fondo azul en hover */
+  color: rgb(223, 223, 223); /* Texto blanco en hover */
+  border: 1px solid #000000; /* Mantiene el borde azul alrededor del botón */
+}
+
+button.recuperar {
+  background-color:  rgb(40, 73, 134); /* Botón con fondo transparente */
+  color: #ffffff; /* Texto azul en el botón de inicio de sesión */
+  border: 1px solid #2051cb; /* Borde azul alrededor del botón */
+   padding: 14px; /* Añadir padding para que el botón sea más grande */
+  border-radius: 25px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar el mouse */
+  transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+button.recuperar:hover {
+  background-color: #f5f5f5; /* Fondo azul en hover */
+  color: rgb(40, 73, 134); /* Texto blanco en hover */
+  border: 1px solid rgb(33, 78, 162);/* Mantiene el borde azul alrededor del botón */
+}
+
+.disclaimer {
+  font-size: 12px; /* Tamaño de fuente pequeño para el texto de términos y condiciones */
+  margin-top: 10px; /* Espacio superior para separar el texto del formulario */
+  text-align: center; /* Centra el texto */
+  color: #ececec;
+}
+
+h4 {
+  font-size: 10px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: normal; /* Establece el estilo de letra sin negrita */
+  color: #ededed;
+  text-align: center; /* Centra el texto */
+}
+/* Estilo para el menú desplegable */
+
+.input-container {
+  position: relative; /* Posicionamiento relativo para los elementos hijos */
+}
+
+.toggle-password {
+  position: absolute; /* Posicionamiento absoluto para el ícono */
+  right: 10px; /* Espacio desde la derecha */
+  top: 45%; /* Centrar verticalmente */
+  transform: translateY(-50%); /* Ajustar para centrar */
+  cursor: pointer; /* Cambiar el cursor al pasar por encima */
+  font-size: 20px; /* Tamaño del ícono */
+ color: #b1b1b1;
+}
+
+.footer {
+  background: linear-gradient(180deg, #000000, #000000);
+  color: #d7d7d7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  font-size: 14px;
+  position: relative;
+  bottom: 0px;
+  width: 96.7%;
+  flex-wrap: wrap; /* Por si en pantallas pequeñas se necesita envolver */
+}
+
+.footer p {
+  margin: 0;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-links a {
+  color: #e3e3e3;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #2d76d0;
+}
+
+.footmpx {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  color: #cfcfcf;
+  font-family: "Kanit", sans-serif;
+  font-size: 12.5px;
+  padding: 8px 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+
+  display: flex;
+  justify-content: space-between; /* izquierda y derecha */
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Lado izquierdo */
+.footer-left {
+  color: #bfbfbf;
+  white-space: nowrap; /* evita que se corte el texto */
+  font-size: 12px;
+}
+
+.footer-left strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Lado derecho: enlaces */
+.footer-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: nowrap;
+}
+
+.footer-links a {
+  color: #dcdcdc;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  font-size: 13px;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+
+
+
+/* 📱 VERSIÓN MÓVIL — formulario TRANSPARENTE, nav, logo y footer fijo */
+@media (max-width: 768px) {
+  /* Oculta banner (imagen + textos) */
+  .banner {
+    display: none !important;
+  }
+
+  /* Body: sin imagen de fondo */
+  body {
+    background-image: none !important;
+    background-color: #111111;
+  }
+
+  /* Centra el formulario: transparente, sin fondo */
+  .form-container {
+    position: relative;
+    top: 70px;
+    right: 0;
+    margin: 80px auto 20px;   /* espacio superior para nav, inferior para footer */
+    width: 90%;
+    max-width: 380px;
+    padding: 22px;
+    border-radius: 16px;
+    background: transparent !important;   /* <-- transparente */
+    box-shadow: none !important;          /* sin sombra */
+    border: 1px solid transparent;   /* opcional: sutil borde para separación */
+    z-index: 6;
+  }
+
+  /* Si quieres que los inputs sigan siendo legibles, mantenlos con fondo */
+  .form-container input[type="text"],
+  .form-container input[type="email"],
+  .form-container input[type="password"],
+  .form-container input[type="tel"] {
+    background-color: #ebebeb; /* inputs blancos para contraste sobre fondo general */
+    color: #111;
+  }
+
+  /* Ajusta barra superior (logo y nav) */
+/* ✅ Centrar logo en la barra superior en móviles */
+.top-bar-buttons {
+  display: flex;
+  justify-content: center !important; /* centra horizontalmente */
+  align-items: center;
+  padding: 10px 0;
+  background: transparent;
+  height: auto;
+}
+
+/* Si tenías botones o enlaces laterales, los ocultamos en móvil */
+.top-bar-buttons a,
+.top-bar-buttons button {
+  display: none !important;
+}
+
+/* Ajuste del logo */
+.top-bar-buttons img {
+  width: 140px;
+  height: auto;
+  margin: 0 auto;
+}
+
+  /* FOOTER fijo abajo, visible siempre */
+  .footmpx {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #242424;           /* fondo blanco (como pediste) */
+    color: #f0f0f0;
+    font-family: "Kanit", sans-serif;
+    font-size: 12px;
+    padding: 10px 16px;
+    border-top: 1px solid transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    z-index: 9999;
+    box-shadow: 0 -1px 8px transparent;
+  }
+
+  .footmpx p {
+    margin: 0;
+    color: #f7f7f7;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .footmpx .footer-links {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .footmpx .footer-links a {
+    color: #f2f2f2;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  .footmpx .footer-links a:hover {
+    color: #111;
+    text-decoration: underline;
+  }
+
+  /* Evita que el footer cubra el contenido del formulario */
+  /* Añade un espacio extra al final de la página equivalente a la altura del footer */
+  .page-bottom-spacer {
+    height: 70px; /* ajustar si cambias la altura del footer */
+  }
+
+  /* Pequeñas mejoras de responsividad para formularios compactos */
+  .form-container h2 { font-size: 20px; }
+  .form-container .logocentro { max-width: 70px; margin-bottom: 10px; }
+}
